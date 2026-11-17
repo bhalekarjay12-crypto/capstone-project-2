@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker AWS Capstone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: #f2f4f8;
+        }
+        h1 { color: #1565c0; }
+        button {
+            padding: 12px 20px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Docker AWS Capstone Project</h1>
+    <p>Full Stack Application Deployment</p>
+
+    <button onclick="checkBackend()">Check Backend</button>
+    <button onclick="getUsers()">View Users</button>
+
+    <div id="result">Application is running.</div>
+
+    <script>
+        async function checkBackend() {
+            const result = document.getElementById("result");
+
+            try {
+                const response = await fetch("/api/health");
+                const data = await response.json();
+                result.innerText = JSON.stringify(data);
+            } catch (error) {
+                result.innerText = "Backend connection failed";
+            }
+        }
+
+        async function getUsers() {
+            const result = document.getElementById("result");
+
+            try {
+                const response = await fetch("/api/users");
+                const data = await response.json();
+                result.innerText = JSON.stringify(data);
+            } catch (error) {
+                result.innerText = "Unable to retrieve users";
+            }
+        }
+    </script>
+</body>
+</html>
